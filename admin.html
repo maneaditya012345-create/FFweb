@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - FF Store</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body class="admin-page">
+
+    <!-- Admin Login -->
+    <div class="admin-login" id="adminLogin">
+        <div class="login-card">
+            <h2><i class="fas fa-lock"></i> Admin Login</h2>
+            <div class="input-group">
+                <label>Username</label>
+                <input type="text" id="adminUser" placeholder="Enter username">
+            </div>
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" id="adminPass" placeholder="Enter password">
+            </div>
+            <button class="btn-primary full-width" onclick="adminLogin()">Login</button>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <div class="admin-dashboard" id="adminDashboard" style="display:none;">
+        <nav class="admin-nav">
+            <div class="nav-container">
+                <span class="logo-text">FF Store <span class="highlight">Admin</span></span>
+                <button class="btn-secondary" onclick="adminLogout()">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+        </nav>
+
+        <div class="admin-container">
+            <!-- Stats Cards -->
+            <div class="admin-stats">
+                <div class="admin-stat-card">
+                    <div class="stat-icon"><i class="fas fa-shopping-cart"></i></div>
+                    <div class="stat-info">
+                        <h3 id="totalOrders">0</h3>
+                        <p>Total Orders</p>
+                    </div>
+                </div>
+                <div class="admin-stat-card">
+                    <div class="stat-icon pending"><i class="fas fa-clock"></i></div>
+                    <div class="stat-info">
+                        <h3 id="pendingOrders">0</h3>
+                        <p>Pending</p>
+                    </div>
+                </div>
+                <div class="admin-stat-card">
+                    <div class="stat-icon completed"><i class="fas fa-check-circle"></i></div>
+                    <div class="stat-info">
+                        <h3 id="completedOrders">0</h3>
+                        <p>Completed</p>
+                    </div>
+                </div>
+                <div class="admin-stat-card">
+                    <div class="stat-icon revenue"><i class="fas fa-rupee-sign"></i></div>
+                    <div class="stat-info">
+                        <h3 id="totalRevenue">₹0</h3>
+                        <p>Revenue</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Orders Filter -->
+            <div class="orders-filter">
+                <h2>Orders</h2>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" onclick="filterOrders('all', this)">All</button>
+                    <button class="filter-btn" onclick="filterOrders('pending', this)">Pending</button>
+                    <button class="filter-btn" onclick="filterOrders('completed', this)">Completed</button>
+                    <button class="filter-btn" onclick="filterOrders('rejected', this)">Rejected</button>
+                </div>
+            </div>
+
+            <!-- Orders Table -->
+            <div class="orders-table-container">
+                <table class="orders-table">
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Player ID</th>
+                            <th>Player Name</th>
+                            <th>Package</th>
+                            <th>Amount</th>
+                            <th>Transaction ID</th>
+                            <th>WhatsApp</th>
+                            <th>Screenshot</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ordersTableBody">
+                        <!-- Filled by JS -->
+                    </tbody>
+                </table>
+                <div class="no-orders" id="noOrders" style="display:none;">
+                    <i class="fas fa-inbox"></i>
+                    <p>No orders found</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Image Preview Modal -->
+    <div class="modal-overlay" id="imageModal" style="display:none;" onclick="closeImageModal()">
+        <div class="modal-content image-modal" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeImageModal()">&times;</button>
+            <img id="previewImage" src="" alt="Screenshot">
+        </div>
+    </div>
+
+    <script src="js/admin.js"></script>
+</body>
+</html>
